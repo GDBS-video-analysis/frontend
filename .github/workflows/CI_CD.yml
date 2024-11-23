@@ -16,11 +16,9 @@ jobs:
         run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
       - name: Pull
         run: |
-          cd ./Web
           docker pull -q ${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME}
       - name: Build
         run: |
-          cd ./Web
           docker build --cache-from=${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME} -q -t ${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME} .
           docker push -q ${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME}
   deploy:
