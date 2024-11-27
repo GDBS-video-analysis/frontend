@@ -1,0 +1,7 @@
+<button (click)="onClickButton($event)" class="h-full w-full px-4">
+  <div class="flex items-center gap-3">
+    <i [class]="srartIcon" class="text-2xl" *ngIf="srartIcon"></i>
+    <ng-content />
+    <i [class]="endIcon" class="text-2xl" *ngIf="endIcon"></i>
+  </div>
+</button>
