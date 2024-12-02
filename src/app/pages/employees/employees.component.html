@@ -1,0 +1,65 @@
+<form [formGroup]="form" class="flex flex-col gap-6">
+  <section class="flex justify-between items-center">
+    <h1 class="font-bold text-[42px] text-gray-90">Реестр сотрудников</h1>
+    <app-button size="medium" srartIcon="bi bi-plus"
+      >Добавить сотрудника</app-button
+    >
+  </section>
+  <p *ngIf="!employees">loading...</p>
+  <table class="custom-table w-full text-sm text-gray-90">
+    <thead>
+      <tr>
+        <th>ФИО</th>
+        <th>Должность</th>
+        <th>Подразделение</th>
+        <th>Электронная почта</th>
+      </tr>
+      <tr>
+        <th class="filter">
+          <app-input
+            startIcon="bi bi-search"
+            placeholder="Поиск"
+            formControlName="fullName"
+          />
+        </th>
+        <th class="filter">
+          <app-input
+            startIcon="bi bi-search"
+            placeholder="Поиск"
+            formControlName="post"
+          />
+        </th>
+        <th class="filter">
+          <app-input
+            startIcon="bi bi-search"
+            placeholder="Поиск"
+            formControlName="departament_id"
+          />
+        </th>
+        <th class="filter">
+          <app-input
+            startIcon="bi bi-search"
+            placeholder="Поиск"
+            formControlName="email"
+          />
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="employees">
+      <tr *ngFor="let employee of employees.data">
+        <td class="flex gap-2 font-medium items-center">
+          <div class="w-10 h-10 rounded-full bg-gray-60"></div>
+          {{ getFullName(employee) }}
+        </td>
+        <td>Должность</td>
+        <td>Подразделение</td>
+        <td>{{ employee.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <app-pagination
+    *ngIf="employees"
+    [count]="employees.pagination.itemsCount"
+    formControlName="page"
+  />
+</form>
