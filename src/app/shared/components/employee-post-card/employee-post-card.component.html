@@ -1,0 +1,9 @@
+<div class="flex gap-2">
+  <app-avatar />
+  <div class="text-gray-90 text-sm font-medium">
+    {{ employee | fullName }}
+    <span class="block text-xs text-gray-60 font-normal">{{
+      employee.post?.name
+    }}</span>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { IButtonType } from '@/app/shared/components/common/button/interface';
 import { NgIf } from '@angular/common';
 import {
   Component,
@@ -17,7 +18,7 @@ const button = cva(['font-medium block w-fit align-middle'], {
       filled: 'text-default-white bg-primary-90 hover:bg-primary-60',
       outline: 'border border-gray-30 bg-default-white text-primary-90',
       danger: 'bg-default-alert text-default-white',
-      link: 'bg-none hover:underline',
+      link: 'hover:underline text-primary-90 decoration-primary-90',
     },
     size: {
       large: 'text-[20px] h-14',
@@ -45,6 +46,7 @@ export class ButtonComponent {
   @Input() size: ButtonVariants['size'];
   @Input() srartIcon: string | undefined;
   @Input() endIcon: string | undefined;
+  @Input() type: IButtonType;
   @Output() handleClick = new EventEmitter<MouseEvent>();
 
   onClickButton(event: MouseEvent) {

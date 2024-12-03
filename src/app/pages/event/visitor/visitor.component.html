@@ -1,0 +1,32 @@
+<div
+  class="flex justify-between items-center py-2 px-3 border-t border-gray-20"
+>
+  <app-employee-post-card [employee]="visitor" />
+  <app-close-icon class="fill-gray-90 cursor-pointer" [click]="toggleModal()" />
+</div>
+<app-modal #modal>
+  <div class="w-[700px] flex flex-col gap-6">
+    <h1 class="font-bold text-2xl text-gray-90">
+      Удаление запланированного посетителя
+    </h1>
+    <p class="text-lg text-center">
+      Вы действительно хотите удалить <b>{{ visitor | fullName }}</b> из
+      запланированных посетителей?
+    </p>
+    <div class="flex gap-4 justify-end">
+      <app-button
+        size="medium"
+        class="px-3"
+        (handleClick)="deleteScheduledVisitor(visitor.employee_id)"
+        >Да</app-button
+      >
+      <app-button
+        variant="outline"
+        size="medium"
+        class="px-8"
+        (handleClick)="toggleModal()()"
+        >Нет</app-button
+      >
+    </div>
+  </div>
+</app-modal>

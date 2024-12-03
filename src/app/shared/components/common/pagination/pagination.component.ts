@@ -33,6 +33,8 @@ export class PaginationComponent implements OnInit, ControlValueAccessor {
   }
   @Input() count!: number;
 
+  @Output() onPageChange = new EventEmitter<number>();
+
   get currentPage() {
     return this._currentPage;
   }
@@ -64,6 +66,7 @@ export class PaginationComponent implements OnInit, ControlValueAccessor {
   }
 
   onPageClick(page: number) {
+    this.onPageChange.emit(page);
     this.currentPage = page;
     this.fillPagesArray(page);
   }

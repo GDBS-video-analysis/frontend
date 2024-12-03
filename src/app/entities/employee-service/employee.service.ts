@@ -1,3 +1,4 @@
+import { EPaginationDefaultValues } from '@/app/shared/enums/constants/pagination';
 import {
   IEmployeeFilter,
   IEmployeesDto,
@@ -12,23 +13,30 @@ import { Observable } from 'rxjs';
 export class EmployeeService {
   constructor() {}
 
-  getEmployees(params: IEmployeeFilter): Observable<IEmployeesDto> {
+  getEmployees(
+    params: IEmployeeFilter,
+    page?: number
+  ): Observable<IEmployeesDto> {
     return new Observable((sub) => {
       setTimeout(() => {
         sub.next({
-          data: times(random(3, 7), (n) => ({
-            employee_id: n.toString(),
+          data: times(EPaginationDefaultValues.PAGE_SIZE, (n) => ({
+            employee_id: random(200, 1000).toString(),
             firstname: 'Jhon',
-            lastname: 'Doe',
+            lastname: 'Doe' + random(10, 100),
             patronymic: 'Jhon',
-            post_id: 1,
+            post: {
+              post_id: '123456',
+              name: 'Уборщик общественных территорий',
+              department_id: 1,
+            },
             biometrics: '',
             is_deleted: false,
             email: 'JhonDoe@gmail.com',
           })),
           pagination: {
-            itemsCount: 150,
-            page: params.page ?? 1,
+            itemsCount: 67,
+            page: page ?? 1,
           },
         });
       }, 500);

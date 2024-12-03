@@ -1,0 +1,25 @@
+<div>
+  <span class="text-gray-90 text-sm">{{ label }}</span>
+  <textarea
+    [ngClass]="{ 'error-border': error }"
+    *ngIf="type == 'text'"
+    [value]="value"
+    (input)="onInput($event)"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    class="placeholder-gray-60 outline-none min-h-[96px] py-[14px] w-full mt-2 mb-1 bg-gray-10 text-gray-90 px-4 border-b border-gray-30"
+  ></textarea>
+  <input
+    *ngIf="type !== 'text'"
+    [ngClass]="{ 'error-border': error }"
+    [value]="value"
+    (input)="onInput($event)"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [type]="type"
+    class="placeholder-gray-60 outline-none h-[48px] w-full mt-2 mb-1 bg-gray-10 text-gray-90 px-4 border-b border-gray-30"
+  />
+  <span class="text-gray-60 text-xs" [ngClass]="{ 'error-text': error }">{{
+    error ? error : helperText
+  }}</span>
+</div>

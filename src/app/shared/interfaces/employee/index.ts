@@ -3,11 +3,12 @@ import {
   IPaginationFilter,
   IPaginationForm,
 } from '@/app/shared/interfaces/helper-interface';
+import { IPost } from '@/app/shared/interfaces/post';
 import { Form, FormControl, FormGroup } from '@angular/forms';
 
 interface IEmployee {
   employee_id: string;
-  post_id?: number;
+  post?: IPost;
   lastname: string;
   firstname: string;
   patronymic?: string;
@@ -16,7 +17,7 @@ interface IEmployee {
   email: string;
 }
 
-interface IEmployeeFilter extends IPaginationFilter {
+interface IEmployeeFilter {
   fullName: string | null;
   post: string | null;
   departament_id: string | null;
@@ -28,7 +29,6 @@ type IEmployeeFilterForm = FormGroup<{
   post: FormControl<string | null>;
   email: FormControl<string | null>;
   departament_id: FormControl<string | null>;
-  page: FormControl<number | null>;
 }>;
 
 type IEmployeesDto = IDefaultCollectionResponse<IEmployee[]>;

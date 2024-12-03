@@ -1,0 +1,13 @@
+<div
+  class="relative"
+  [style.display]="isVisible ? 'block' : 'none'"
+  (click)="onContainerClick($event)"
+>
+  <div
+    class="fixed inset-0 bg-black/[0.2] min-h-full overflow-y-auto flex items-center justify-center modal"
+  >
+    <div class="bg-default-white border border-gray-20 p-[18px]">
+      <ng-content class="" />
+    </div>
+  </div>
+</div>

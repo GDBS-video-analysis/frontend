@@ -1,0 +1,12 @@
+.error-text {
+  color: theme(colors.default.alert);
+}
+
+.error-border {
+  border-width: 2px;
+  border-color: theme(colors.default.alert);
+}
+
+.textarea {
+  height: 96px;
+}
