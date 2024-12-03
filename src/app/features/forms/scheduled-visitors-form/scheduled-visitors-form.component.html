@@ -1,19 +1,18 @@
 <form [formGroup]="form" class="flex flex-col gap-6">
-  <section class="flex justify-between items-center">
-    <h1 class="font-bold text-[42px] text-gray-90">Реестр сотрудников</h1>
-    <app-button size="medium" srartIcon="bi bi-plus"
-      >Добавить сотрудника</app-button
-    >
-  </section>
-  <table class="custom-table w-full text-sm text-gray-90">
-    <thead>
+  <h1 class="text-lg text-gray-90 font-bold">Планируемые посетители</h1>
+  <table
+    class="custom-table w-full text-sm text-gray-90 h-[500px] overflow-auto block bg-gray-10"
+  >
+    <thead class="sticky top-0 bg-gray-10">
       <tr>
+        <th></th>
         <th>ФИО</th>
         <th>Должность</th>
         <th>Подразделение</th>
         <th>Электронная почта</th>
       </tr>
       <tr>
+        <th></th>
         <th class="filter">
           <app-input
             startIcon="bi bi-search"
@@ -45,21 +44,28 @@
       </tr>
     </thead>
     <tbody *ngIf="employees">
-      <tr *ngFor="let employee of employees.data">
+      <tr *ngFor="let employee of employees">
+        <td>
+          <input
+            type="checkbox"
+            (change)="onCheckEmployee(employee.employee_id)"
+            [value]="employee.employee_id"
+          />
+        </td>
         <td class="flex gap-2 font-medium items-center">
           <app-avatar />
-          {{ getFullName(employee) }}
+          {{ employee | fullName }}
         </td>
         <td>{{ employee.post?.name }}</td>
         <td>Подразделение</td>
         <td>{{ employee.email }}</td>
       </tr>
+      <tr #loadMoreTrigger>
+        <td *ngIf="employees.length < itemsCount">Загрузка ...</td>
+      </tr>
     </tbody>
   </table>
-  <app-pagination
-    *ngIf="employees"
-    [count]="employees.pagination.itemsCount"
-    [currentPage]="page"
-    (onPageChange)="handlePageChange($event)"
-  />
+  <app-button size="medium" (handleClick)="onSaveBtnClick()"
+    >Сохранить</app-button
+  >
 </form>

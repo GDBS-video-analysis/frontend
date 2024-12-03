@@ -1,4 +1,5 @@
 import { EmployeeService } from '@/app/entities/employee-service/employee.service';
+import { AvatarComponent } from '@/app/shared/components/avatar/avatar.component';
 import { ButtonComponent } from '@/app/shared/components/common/button/button.component';
 import { InputComponent } from '@/app/shared/components/common/input/input.component';
 import { LoaderComponent } from '@/app/shared/components/common/loader/loader.component';
@@ -11,7 +12,7 @@ import {
   IEmployeesDto,
 } from '@/app/shared/interfaces/employee';
 import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -19,7 +20,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { debounceTime, Subject, switchMap } from 'rxjs';
 
 @Component({
@@ -34,13 +35,15 @@ import { debounceTime, Subject, switchMap } from 'rxjs';
     NgFor,
     ReactiveFormsModule,
     PaginationComponent,
+    AvatarComponent,
   ],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.css',
 })
-export class EmployeesComponent {
+export class EmployeesComponent implements OnInit {
   employees: IEmployeesDto | undefined;
   form: IEmployeeFilterForm;
+  page = 1;
 
   constructor(
     private employeeService: EmployeeService,
@@ -53,31 +56,13 @@ export class EmployeesComponent {
       post: new FormControl<string>(''),
       email: new FormControl<string>(''),
       departament_id: new FormControl<string>(''),
-      page: new FormControl<number>(1),
     });
+  }
 
-    route.queryParams.subscribe((params) => {
-      this.form.controls.fullName.patchValue(
-        params[EEmployeeFilterParams.FULL_NAME] ?? ''
-      );
-      this.form.controls.email.patchValue(
-        params[EEmployeeFilterParams.EMIAL] ?? ''
-      );
-      this.form.controls.departament_id.patchValue(
-        params[EEmployeeFilterParams.DEPARTAMENT_ID] ?? ''
-      );
-      this.form.controls.post.patchValue(
-        params[EEmployeeFilterParams.POST] ?? ''
-      );
-      this.form.controls.page.patchValue(
-        Number(params[EPaginationParams.PAGE] ?? 1)
-      );
-
-      this.employeeService
-        .getEmployees(this.form.getRawValue())
-        .subscribe((data) => {
-          this.employees = data;
-        });
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.updateFormFromParams(params);
+      this.loadEmployees();
     });
 
     this.form.valueChanges.pipe(debounceTime(500)).subscribe(() => {
@@ -85,14 +70,45 @@ export class EmployeesComponent {
     });
   }
 
-  getFullName(employee: IEmployee) {
-    return `${employee.firstname} ${employee.patronymic} ${employee.lastname}`;
+  updateFormFromParams(params: Params): void {
+    this.form.controls.fullName.patchValue(
+      params[EEmployeeFilterParams.FULL_NAME] ?? ''
+    );
+    this.form.controls.email.patchValue(
+      params[EEmployeeFilterParams.EMIAL] ?? ''
+    );
+    this.form.controls.departament_id.patchValue(
+      params[EEmployeeFilterParams.DEPARTAMENT_ID] ?? ''
+    );
+    this.form.controls.post.patchValue(
+      params[EEmployeeFilterParams.POST] ?? ''
+    );
+    this.page = params[EPaginationParams.PAGE]
+      ? Number(params[EPaginationParams.PAGE])
+      : 1;
   }
 
-  updateQueryParams(): void {
+  loadEmployees(): void {
+    this.employeeService
+      .getEmployees(this.form.getRawValue(), this.page)
+      .subscribe((data) => {
+        this.employees = data;
+      });
+  }
+
+  handlePageChange(page: number) {
+    this.page = page;
+    this.updateQueryParams(page);
+  }
+
+  updateQueryParams(page?: number): void {
     this.router.navigate([], {
-      queryParams: this.form.getRawValue(),
+      queryParams: { ...this.form.getRawValue(), page: page ?? this.page },
       queryParamsHandling: 'merge',
     });
+  }
+
+  getFullName(employee: IEmployee) {
+    return `${employee.firstname} ${employee.patronymic} ${employee.lastname}`;
   }
 }

@@ -1,0 +1,140 @@
+<div
+  *ngIf="event"
+  class="flex flex-col gap-6 pb-12 *:p-[18px] *:bg-default-white"
+>
+  <section class="flex items-center justify-between !p-0 !bg-transparent">
+    <h1 class="font-bold text-[42px] text-gray-90">
+      {{ event.name }}
+    </h1>
+    <app-button size="medium">Статистика посещения</app-button>
+  </section>
+
+  <form
+    class="bg-default-white border-gray-20"
+    [formGroup]="updateEventForm"
+    novalidate
+    (ngSubmit)="handleSubmit()"
+  >
+    <div class="flex justify-between mb-[10px]">
+      <h3 class="text-lg font-bold text-gray-90">Информация</h3>
+      <app-button
+        *ngIf="updateEventFormDisabled"
+        size="medium"
+        variant="outline"
+        (handleClick)="enable()"
+        type="button"
+        >Редактировать</app-button
+      >
+      <app-button
+        type="button"
+        (handleClick)="handleCancel()"
+        *ngIf="!updateEventFormDisabled"
+        size="medium"
+        variant="link"
+        >Отменить</app-button
+      >
+    </div>
+
+    <div class="grid grid-cols-2 grid-flow-row auto-rows-min gap-4">
+      <app-text-field
+        label="Название"
+        class="col-span-2"
+        formControlName="name"
+        [error]="
+          updateEventForm.controls.name.invalid ? 'Некорректный ввод' : ''
+        "
+      />
+      <app-text-field
+        label="Дата"
+        type="date"
+        formControlName="date"
+        [error]="
+          updateEventForm.controls.date.invalid ? 'Некорректный ввод' : ''
+        "
+      />
+      <app-text-field
+        label="Время"
+        type="time"
+        formControlName="time"
+        [error]="
+          updateEventForm.controls.time.invalid ? 'Некорректный ввод' : ''
+        "
+      />
+      <app-text-field
+        label="Описание"
+        class="col-span-2"
+        [formControl]="updateEventForm.controls.description"
+        type="text"
+        [error]="
+          updateEventForm.controls.description.invalid
+            ? 'Некорректный ввод'
+            : ''
+        "
+      />
+      <app-button
+        *ngIf="!updateEventFormDisabled"
+        size="medium"
+        variant="outline"
+        type="submit"
+        >Сохранить</app-button
+      >
+    </div>
+  </form>
+
+  <section>
+    <h3 class="text-lg font-bold text-gray-90 mb-6">Планируемые посетители</h3>
+    <section class="mt-6" *ngIf="event.scheduled_visitors.length > 0">
+      <app-visitor
+        *ngFor="let visitor of event.scheduled_visitors"
+        [visitor]="visitor"
+        (onDeleteVisitor)="deleteScheduledVisitor($event)"
+      />
+    </section>
+
+    <app-button
+      *ngIf="event.scheduled_visitors.length"
+      size="medium"
+      variant="outline"
+      (handleClick)="showAddVisitorsModal()"
+      class="mt-6"
+      >Добавить посетителей</app-button
+    >
+  </section>
+
+  <section>
+    <h3 class="text-lg font-bold text-gray-90 mb-6">Видеозапись</h3>
+    <app-button size="medium" variant="outline">Загрузить видео</app-button>
+  </section>
+
+  <app-button
+    class="!bg-transparent !p-0"
+    variant="link"
+    size="medium"
+    (handleClick)="toggleDeleteEventModal()"
+    >Удалить мероприятие</app-button
+  >
+</div>
+<app-modal #addVisitorsModal>
+  <app-scheduled-visitors-form (onSave)="addScheduledVisitors($event)" />
+</app-modal>
+<app-modal #deleteEventModal>
+  <div class="w-[700px] flex flex-col gap-6">
+    <h1 class="font-bold text-2xl text-gray-90">Удаление мероприятия</h1>
+    <p class="text-lg text-center">
+      Вы действительно хотите удалить мероприятие <b>{{ event?.name }}</b> из
+      реестра мероприятий?
+    </p>
+    <div class="flex gap-4 justify-end">
+      <app-button size="medium" class="px-3" (handleClick)="deleteEvent()"
+        >Да</app-button
+      >
+      <app-button
+        variant="outline"
+        size="medium"
+        class="px-8"
+        (handleClick)="toggleDeleteEventModal()"
+        >Нет</app-button
+      >
+    </div>
+  </div>
+</app-modal>
