@@ -1,5 +1,6 @@
 import { useNewEmployeePresenter } from "@entities/case/employees/new/presenter";
-import { NewEmployeeForm } from "@features/forms/employees/new";
+import { PersonalDataNewEmployeePartForm } from "@features/forms/employees/new/personal-data";
+import { PhotoNewEmployeePartForm } from "@features/forms/employees/new/photo";
 import { Button } from "@shared/components/common/button";
 import { Loader } from "@shared/components/common/loader";
 import { useDeparmentsContext } from "@shared/services/departments-provider/hook";
@@ -21,8 +22,11 @@ const NewEmployeePage = (): ReactNode => {
       >
         <h1 className="font-bold text-[42px] text-gray-90">Новый сотрудник</h1>
         <div className="bg-default-white p-4">
+          <PhotoNewEmployeePartForm form={form} />
+        </div>
+        <div className="bg-default-white p-4">
           {departments && posts && (
-            <NewEmployeeForm
+            <PersonalDataNewEmployeePartForm
               departments={departments}
               posts={posts}
               form={form}
