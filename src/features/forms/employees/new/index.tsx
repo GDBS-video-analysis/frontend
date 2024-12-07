@@ -13,7 +13,7 @@ interface INewEmployeeFormProps {
   form: UseFormReturn<INewEmployeePort>;
 }
 
-export const PersonalDataNewEmployeePartForm = ({
+export const NewEmployeeForm = ({
   departments,
   posts,
   form,
@@ -58,8 +58,8 @@ export const PersonalDataNewEmployeePartForm = ({
           label="Имя"
           required={true}
           placeholder="Введите имя"
-          error={errors.name?.message}
-          {...register("name")}
+          error={errors.firstName?.message}
+          {...register("firstName")}
         />
         <TextFiled
           label="Фамилия"
@@ -87,8 +87,15 @@ export const PersonalDataNewEmployeePartForm = ({
           label="Должность"
           required={true}
           options={postsSelectOptions}
-          error={errors.postId?.message}
-          {...register("postId")}
+          error={errors.postID?.message}
+          {...register("postID")}
+        />
+        <TextFiled
+          label="Телефон"
+          placeholder="Введите телефон"
+          required={true}
+          error={errors.phone?.message}
+          {...register("phone")}
         />
       </div>
     </div>

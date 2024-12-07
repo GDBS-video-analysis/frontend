@@ -1,10 +1,11 @@
 import { INewEmployeePort } from '@shared/interfaces/employees';
+import { api } from '@shared/lib/api';
+import { AxiosResponse } from 'axios';
 
-export const newEmployee = async (port: INewEmployeePort): Promise<void> => {
-  console.log(port);
-  return new Promise((res) => {
-    setTimeout(() => {
-      res();
-    }, 500);
-  });
+const SLUG = '/employees';
+
+export const newEmployee = async (
+  port: INewEmployeePort
+): Promise<AxiosResponse<void>> => {
+  return api.post(`${SLUG}/employee`, port);
 };
