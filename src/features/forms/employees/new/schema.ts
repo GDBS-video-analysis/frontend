@@ -3,7 +3,7 @@ import { number, object, string } from 'yup';
 
 export const newEmployeeSchema = object().shape({
   firstName: string().required('Введите имя'),
-  lastname: string().required('Введите фамилию'),
+  lastName: string().required('Введите фамилию'),
   patronymic: string(),
   postID: number()
     .required('Выберите должность')
