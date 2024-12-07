@@ -21,8 +21,16 @@ const NewEmployeePage = (): ReactNode => {
       >
         <h1 className="font-bold text-[42px] text-gray-90">Новый сотрудник</h1>
         <div className="bg-default-white p-4">
+<<<<<<< HEAD
           {departments && posts && (
             <NewEmployeeForm
+=======
+          <PhotoNewEmployeePartForm form={form} />
+        </div>
+        <div className="bg-default-white p-4">
+          {departments && posts && (
+            <PersonalDataNewEmployeePartForm
+>>>>>>> f4c09d4be708dab4e9b886d3d5af7d5693c62017
               departments={departments}
               posts={posts}
               form={form}
