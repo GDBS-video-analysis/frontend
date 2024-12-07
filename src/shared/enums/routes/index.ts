@@ -1,4 +1,5 @@
 import { EEmployeeQueryParams } from '@shared/enums/params/employee';
+import { EEventQueryParams } from '@shared/enums/params/employee/events';
 
 export enum ERoutes {
   EMPLOYEES = '/employees',
@@ -6,6 +7,7 @@ export enum ERoutes {
   EMPLOYEE = `${EMPLOYEES}/:${EEmployeeQueryParams.EMPLOYEE_ID}`,
 
   EVENTS = '/events',
+  EVENT = `${EVENTS}/:${EEventQueryParams.eventId}`,
 
   UNFOUND = '/404',
 }
