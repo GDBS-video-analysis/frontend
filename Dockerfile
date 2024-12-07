@@ -4,6 +4,7 @@ RUN apk --no-cache --update --virtual build-dependencies add \
 	make \
 	g++
 WORKDIR /app
+ARG VITE_API = https://api.dev.176.108.248.181.nip.io
 COPY package*.json ./
 RUN npm ci
 COPY . .

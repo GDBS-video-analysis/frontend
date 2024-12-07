@@ -65,8 +65,8 @@ export const NewEmployeeForm = ({
           label="Фамилия"
           required={true}
           placeholder="Введите фамилию"
-          error={errors.lastname?.message}
-          {...register("lastname")}
+          error={errors.lastName?.message}
+          {...register("lastName")}
         />
         <TextFiled
           label="Отчество"

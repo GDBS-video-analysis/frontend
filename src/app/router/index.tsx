@@ -8,6 +8,9 @@ import { createBrowserRouter } from "react-router-dom";
 
 const NewEmployeePage = LazyLoader(lazy(() => import("@pages/employee/new")));
 const EventsPage = LazyLoader(lazy(() => import("@pages/events/all")));
+const EmployeePage = LazyLoader(
+  lazy(() => import("@pages/employee/employee-page"))
+);
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +29,10 @@ export const router = createBrowserRouter([
               {
                 element: <EventsPage />,
                 path: ERoutes.EVENTS,
+              },
+              {
+                element: <EmployeePage />,
+                path: ERoutes.EMPLOYEE,
               },
             ],
           },
