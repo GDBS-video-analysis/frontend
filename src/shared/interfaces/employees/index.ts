@@ -1,9 +1,9 @@
 interface INewEmployeePort {
-  name: string;
+  firstName: string;
   lastname: string;
   patronymic?: string;
-  postId: number;
-  photo: FileList;
+  postID: number;
+  phone: string;
 }
 
 export type { INewEmployeePort };
