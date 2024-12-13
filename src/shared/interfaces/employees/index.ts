@@ -1,4 +1,8 @@
 import { IEvent } from '@shared/interfaces/events';
+import {
+  IPaginationFilter,
+  IResponseWithPagination,
+} from '@shared/interfaces/helper-interfaces';
 import { AxiosResponse } from 'axios';
 
 interface INewEmployeePort {
@@ -22,10 +26,23 @@ type IEmployeeVisitHistoryDto = AxiosResponse<IEmployeeVisitHistory>;
 
 type IEmployeeDto = AxiosResponse<IEmployee>;
 
+type IEmployees = IResponseWithPagination<IEmployee>;
+
+type IEmployeesDto = AxiosResponse<IEmployees>;
+
+interface IEmployeeFilter extends IPaginationFilter {
+  searchName?: string;
+  searchPost?: string;
+  searchDepartment?: string;
+}
+
 export type {
   INewEmployeePort,
   IEmployee,
   IEmployeeDto,
   IEmployeeVisitHistoryDto,
   IEmployeeVisitHistory,
+  IEmployeeFilter,
+  IEmployeesDto,
+  IEmployees,
 };

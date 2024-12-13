@@ -1,3 +1,4 @@
+import { IEmployee } from '@shared/interfaces/employees';
 import { IFile } from '@shared/interfaces/file';
 import { AxiosResponse } from 'axios';
 
@@ -19,9 +20,27 @@ interface IUpdateEventFormPort extends Omit<IUpdateEventPort, 'dateTime'> {
 
 interface ISingleEvent extends Omit<IEvent, 'videoFile' | 'visitorsCount'> {
   videoFile: IFile;
+  expectedEmployees?: IEmployee[];
 }
 
 type ISingleEventDto = AxiosResponse<ISingleEvent>;
+
+interface IEventVisitingStatistics {
+  presentEmployees: IEmployee[];
+  absentEmployees: IEmployee[];
+}
+
+type IEventVisitingStatisticsDto = AxiosResponse<IEventVisitingStatistics>;
+
+interface IExpectedEmployeesPort {
+  eventId: number;
+  employeesIds: number[];
+}
+
+interface IUploadEventVideoFilePort {
+  eventId: number;
+  videoFile: FileList;
+}
 
 export type {
   IEvent,
@@ -29,4 +48,8 @@ export type {
   ISingleEvent,
   ISingleEventDto,
   IUpdateEventFormPort,
+  IEventVisitingStatistics,
+  IEventVisitingStatisticsDto,
+  IExpectedEmployeesPort,
+  IUploadEventVideoFilePort,
 };
