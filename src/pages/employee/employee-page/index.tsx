@@ -5,7 +5,6 @@ import { Backarrow } from "@shared/components/backarrow";
 import { Button } from "@shared/components/common/button";
 import { Loader } from "@shared/components/common/loader";
 import { TwoRowLabel } from "@shared/components/two-row-label";
-import { FILES_API } from "@shared/constants/default-values";
 import { ERoutes } from "@shared/enums/routes";
 import { VisitHistoryTable } from "@widgets/tables/employees/visit-history";
 
@@ -31,11 +30,7 @@ const EmployeePage = () => {
                   form="square"
                   width={180}
                   height={220}
-                  src={
-                    employee.avatarID
-                      ? `${FILES_API}/${employee.avatarID}`
-                      : undefined
-                  }
+                  avatarId={employee.avatarID}
                 />
                 <div className="flex flex-col gap-4">
                   <TwoRowLabel
