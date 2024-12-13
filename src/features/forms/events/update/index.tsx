@@ -8,18 +8,20 @@ import { UseFormReturn } from "react-hook-form";
 interface IUpdateEventFormProps {
   form: UseFormReturn<IUpdateEventFormPort>;
   isDisabled: boolean;
+  handleSubmit(e?: React.BaseSyntheticEvent): Promise<void>;
 }
 
 export const UpdateEventForm = ({
   form,
   isDisabled,
+  handleSubmit,
 }: IUpdateEventFormProps) => {
   const {
     register,
     formState: { errors },
   } = form;
   return (
-    <form className="grid gap-4 grid-cols-2 row-auto ">
+    <form className="grid gap-4 grid-cols-2 row-auto" onSubmit={handleSubmit}>
       <input hidden {...register("eventID")} />
       <div className="col-span-2">
         <TextFiled
@@ -30,14 +32,26 @@ export const UpdateEventForm = ({
           {...register("name")}
         />
       </div>
-      <DatetimeFiled type="date" label="Дата" disabled={isDisabled} />
-      <DatetimeFiled type="time" label="Время" disabled={isDisabled} />
+      <DatetimeFiled
+        type="date"
+        label="Дата"
+        disabled={isDisabled}
+        error={errors.date?.message}
+        {...register("date")}
+      />
+      <DatetimeFiled
+        type="time"
+        label="Время"
+        disabled={isDisabled}
+        error={errors.time?.message}
+        {...register("time")}
+      />
       <div className="col-span-2">
         <TextAreaFiled
           className="h-[96px] grid-cols-2"
-          label="Название"
-          placeholder="Введите название"
-          error={errors.name?.message}
+          label="Описание"
+          placeholder="Введите описание"
+          error={errors.description?.message}
           disabled={isDisabled}
           {...register("description")}
         />

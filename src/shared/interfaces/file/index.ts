@@ -1,5 +1,5 @@
 interface IFile {
-  fileId: number;
+  fileID: number;
   name: string;
   size: number;
   createdAt: string;

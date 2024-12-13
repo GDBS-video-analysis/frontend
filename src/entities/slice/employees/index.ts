@@ -1,6 +1,9 @@
 import {
   IEmployee,
   IEmployeeDto,
+  IEmployeeFilter,
+  IEmployees,
+  IEmployeesDto,
   IEmployeeVisitHistory,
   IEmployeeVisitHistoryDto,
   INewEmployeePort,
@@ -26,4 +29,10 @@ export const getEmployeeVisitHistory = async (
   employeeId: number
 ): Promise<IEmployeeVisitHistoryDto> => {
   return api.get<IEmployeeVisitHistory>(`${SLUG}/${employeeId}/visitHistory`);
+};
+
+export const getEmployees = async (
+  port: IEmployeeFilter
+): Promise<IEmployeesDto> => {
+  return api.get<IEmployees>(`${SLUG}/employees`, { params: { ...port } });
 };
