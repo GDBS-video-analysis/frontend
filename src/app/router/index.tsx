@@ -12,6 +12,9 @@ const EmployeePage = LazyLoader(
   lazy(() => import("@pages/employee/employee-page"))
 );
 const EventPage = LazyLoader(lazy(() => import("@pages/events/event-page")));
+const EventStatisticsPage = LazyLoader(
+  lazy(() => import("@pages/events/statistics"))
+);
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +41,10 @@ export const router = createBrowserRouter([
               {
                 element: <EventPage />,
                 path: ERoutes.EVENT,
+              },
+              {
+                element: <EventStatisticsPage />,
+                path: ERoutes.EVENT_STATISTICS,
               },
             ],
           },

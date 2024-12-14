@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         primary: {
+          30: "#FEABA2",
           60: "#D94B3C",
           90: "#C22918",
         },
@@ -19,6 +20,9 @@ export default {
           60: "#697077",
           90: "#21272A",
         },
+      },
+      boxShadow: {
+        leftBorder: "inset 3px 0px #C22918",
       },
     },
   },
