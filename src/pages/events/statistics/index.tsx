@@ -11,8 +11,10 @@ import { getFormatDate } from "@shared/utils/scripts/getFormatDate";
 import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
 import { AbsentVisitors } from "@widgets/events/absent-visitors";
 import { PresentVisitors } from "@widgets/events/present-visitors";
+import { useNavigate } from "react-router-dom";
 
 const EventStatisticsPage = () => {
+  const nav = useNavigate();
   const { data: event } = useGetEventPresenter();
   const { data, isLoading } = useGetEventVisitingStatisticsPresenter();
   return (
@@ -48,7 +50,19 @@ const EventStatisticsPage = () => {
               style={{ background: "#FFFFFF" }}
               label="Время конца"
             />
-            <Button intent="outlined" className="ms-6">
+            <Button
+              intent="outlined"
+              className="ms-6"
+              onClick={() =>
+                nav(
+                  getRouteWithId(
+                    ERoutes.EVENT_DASHBOARD,
+                    EEventQueryParams.eventId,
+                    event.eventID
+                  )
+                )
+              }
+            >
               Дашборд
             </Button>
           </div>
