@@ -26,7 +26,7 @@ const DashboardPage = () => {
       <section className="bg-default-white p-4">
         <h2 className="text-gray-90 font-bold text-lg mb-4">Посетители</h2>
         <iframe
-          src="https://datalens.yandex/qbuyytmfarpud?event_id=1&_embedded=1&_theme=light"
+          src={`https://datalens.yandex/qbuyytmfarpud?event_id=${eventId}&_embedded=1&_theme=light`}
           className="h-[400px] w-full"
         />
       </section>
