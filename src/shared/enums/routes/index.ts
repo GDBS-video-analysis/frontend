@@ -9,6 +9,7 @@ export enum ERoutes {
   EVENTS = '/events',
   EVENT = `${EVENTS}/:${EEventQueryParams.eventId}`,
   EVENT_STATISTICS = `${EVENTS}/:${EEventQueryParams.eventId}/statistics`,
+  EVENT_DASHBOARD = `${EVENTS}/:${EEventQueryParams.eventId}/dashboard`,
 
   UNFOUND = '/404',
 }
