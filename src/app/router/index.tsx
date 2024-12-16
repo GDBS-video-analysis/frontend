@@ -1,7 +1,5 @@
 import { LazyLoader } from "@shared/components/common/load-component";
 import { ERoutes } from "@shared/enums/routes";
-import { DepartmentsProvider } from "@shared/services/departments-provider/provider";
-import { PostsProvider } from "@shared/services/posts-provider/provider";
 import { BaseLayout } from "@widgets/layouts/base-layout";
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
@@ -33,57 +31,44 @@ export const router = createBrowserRouter([
     element: <BaseLayout />,
     children: [
       {
-        element: <DepartmentsProvider />,
-        children: [
-          {
-            element: <PostsProvider />,
-            children: [
-              {
-                element: <NewEmployeePage />,
-                path: ERoutes.NEW_EMPLOYEE,
-              },
-              {
-                element: <EmployeePage />,
-                path: ERoutes.EMPLOYEE,
-              },
-              {
-                element: <EventsPage />,
-                path: ERoutes.EVENTS,
-              },
-              {
-                element: <EventPage />,
-                path: ERoutes.EVENT,
-              },
-              {
-                element: <EventStatisticsPage />,
-                path: ERoutes.EVENT_STATISTICS,
-              },
-              {
-                element: <DashboardPage />,
-                path: ERoutes.EVENT_DASHBOARD,
-              },
-              {
-                element: <EmployeesPage />,
-                path: ERoutes.EMPLOYEES,
-              },
-              {
-                element: <EventEmployeePage />,
-                path: ERoutes.EVENT_EMPLOYEE,
-              },
-              {
-                element: <UnregisterPersonPage />,
-                path: ERoutes.UNREGISTER_PERSON,
-              },
-<<<<<<< HEAD
-              {
-                element: <EditEmployeePage />,
-                path: ERoutes.EDIT_EMPLOYEE,
-              },
-=======
->>>>>>> b2a9ac30397ee4fc97de1db442f32db85bc2db7c
-            ],
-          },
-        ],
+        element: <NewEmployeePage />,
+        path: ERoutes.NEW_EMPLOYEE,
+      },
+      {
+        element: <EmployeePage />,
+        path: ERoutes.EMPLOYEE,
+      },
+      {
+        element: <EventsPage />,
+        path: ERoutes.EVENTS,
+      },
+      {
+        element: <EventPage />,
+        path: ERoutes.EVENT,
+      },
+      {
+        element: <EventStatisticsPage />,
+        path: ERoutes.EVENT_STATISTICS,
+      },
+      {
+        element: <DashboardPage />,
+        path: ERoutes.EVENT_DASHBOARD,
+      },
+      {
+        element: <EmployeesPage />,
+        path: ERoutes.EMPLOYEES,
+      },
+      {
+        element: <EventEmployeePage />,
+        path: ERoutes.EVENT_EMPLOYEE,
+      },
+      {
+        element: <UnregisterPersonPage />,
+        path: ERoutes.UNREGISTER_PERSON,
+      },
+      {
+        element: <EditEmployeePage />,
+        path: ERoutes.EDIT_EMPLOYEE,
       },
     ],
   },

@@ -6,7 +6,6 @@ import { Button } from "@shared/components/common/button";
 import { DatetimeFiled } from "@shared/components/common/date-time";
 import { Loader } from "@shared/components/common/loader";
 import { LocalTabs } from "@shared/components/common/local-tabs";
-import { EEmployeeQueryParams } from "@shared/enums/params/employee";
 import { EEventQueryParams } from "@shared/enums/params/events";
 import { EUnregisterPersonQueryParams } from "@shared/enums/params/unregister-person";
 import { ERoutes } from "@shared/enums/routes";

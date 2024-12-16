@@ -1,14 +1,10 @@
 import { useGetDepartmentsPresenter } from "@entities/case/departments/presenter";
 import { Select } from "@shared/components/common/select";
 import { TextFiled } from "@shared/components/common/text-filed";
-import { IDepartment } from "@shared/interfaces/departments";
 import { INewEmployeePort } from "@shared/interfaces/employees";
-import { IPost } from "@shared/interfaces/posts";
 import { UseFormReturn } from "react-hook-form";
 
 interface INewEmployeeFormProps {
-  departments: IDepartment[];
-  posts: IPost[];
   form: UseFormReturn<INewEmployeePort>;
 }
 
