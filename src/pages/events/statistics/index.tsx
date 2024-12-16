@@ -6,19 +6,37 @@ import { Button } from "@shared/components/common/button";
 import { DatetimeFiled } from "@shared/components/common/date-time";
 import { Loader } from "@shared/components/common/loader";
 import { LocalTabs } from "@shared/components/common/local-tabs";
+import { EEmployeeQueryParams } from "@shared/enums/params/employee";
 import { EEventQueryParams } from "@shared/enums/params/events";
+import { EUnregisterPersonQueryParams } from "@shared/enums/params/unregister-person";
 import { ERoutes } from "@shared/enums/routes";
+import { IEventIdQueryParams } from "@shared/interfaces/params/event";
 import { getFormatDate } from "@shared/utils/scripts/getFormatDate";
 import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
 import { AbsentVisitors } from "@widgets/events/absent-visitors";
 import { PresentVisitors } from "@widgets/events/present-visitors";
 import { VisitorRowWrapper } from "@widgets/events/visitor-row/visitor-row-wrapper";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EventStatisticsPage = () => {
-  const nav = useNavigate();
   const { data: event } = useGetEventPresenter();
   const { data, isLoading } = useGetEventVisitingStatisticsPresenter();
+  const { eventId } = useParams() as unknown as IEventIdQueryParams;
+  const nav = useNavigate();
+  const handleUnregisterPersonClick = (unregisterPersonId: number) => {
+    const routePart = getRouteWithId(
+      ERoutes.UNREGISTER_PERSON,
+      EUnregisterPersonQueryParams.UNREGISTER_PERSON_ID,
+      eventId
+    );
+    nav(
+      getRouteWithId(
+        routePart,
+        EEmployeeQueryParams.EMPLOYEE_ID,
+        unregisterPersonId
+      )
+    );
+  };
   return (
     <Loader isLoading={isLoading}>
       {data && event && (
@@ -92,8 +110,12 @@ const EventStatisticsPage = () => {
           <section className="p-[18px] bg-default-white">
             <Accordion header="Неизвестные">
               {data.presentPersons?.unregisterPersons?.map((visitor, index) => (
-                <VisitorRowWrapper index={index + 1}>
-                  <h3>Незвестный пользователь {visitor}</h3>
+                <VisitorRowWrapper
+                  key={visitor}
+                  index={index + 1}
+                  handleClick={() => handleUnregisterPersonClick(visitor)}
+                >
+                  <h3>Незвестный пользователь</h3>
                 </VisitorRowWrapper>
               ))}
             </Accordion>

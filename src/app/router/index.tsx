@@ -21,6 +21,12 @@ const DashboardPage = LazyLoader(
 const EmployeesPage = LazyLoader(
   lazy(() => import("@pages/employee/employees-page"))
 );
+const EventEmployeePage = LazyLoader(
+  lazy(() => import("@pages/employee/event-employee"))
+);
+const UnregisterPersonPage = LazyLoader(
+  lazy(() => import("@pages/employee/unregister-person"))
+);
 export const router = createBrowserRouter([
   {
     element: <BaseLayout />,
@@ -58,6 +64,14 @@ export const router = createBrowserRouter([
               {
                 element: <EmployeesPage />,
                 path: ERoutes.EMPLOYEES,
+              },
+              {
+                element: <EventEmployeePage />,
+                path: ERoutes.EVENT_EMPLOYEE,
+              },
+              {
+                element: <UnregisterPersonPage />,
+                path: ERoutes.UNREGISTER_PERSON,
               },
             ],
           },

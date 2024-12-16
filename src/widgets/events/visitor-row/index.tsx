@@ -5,11 +5,16 @@ import { VisitorRowWrapper } from "@widgets/events/visitor-row/visitor-row-wrapp
 interface IVisitorRowProps {
   visitor: IEmployee;
   index: number;
+  handleClick?(): void;
 }
 
-export const VisitorRow = ({ visitor, index }: IVisitorRowProps) => {
+export const VisitorRow = ({
+  visitor,
+  index,
+  handleClick,
+}: IVisitorRowProps) => {
   return (
-    <VisitorRowWrapper index={index}>
+    <VisitorRowWrapper index={index} handleClick={handleClick}>
       <EmployeeShortCard employee={visitor} />
     </VisitorRowWrapper>
   );
