@@ -74,9 +74,9 @@ const EventStatisticsPage = () => {
                 header: "Присутсвующие",
                 body: (
                   <PresentVisitors
-                    expectedEmployees={data.presentPersons.expectedEmployees}
+                    expectedEmployees={data.presentPersons?.expectedEmployees}
                     notExpectedEmployees={
-                      data.presentPersons.notExpectedEmployees
+                      data.presentPersons?.notExpectedEmployees
                     }
                   />
                 ),
@@ -91,7 +91,7 @@ const EventStatisticsPage = () => {
           />
           <section className="p-[18px] bg-default-white">
             <Accordion header="Неизвестные">
-              {data.presentPersons.unregisterPersons.map((visitor, index) => (
+              {data.presentPersons?.unregisterPersons?.map((visitor, index) => (
                 <VisitorRowWrapper index={index + 1}>
                   <h3>Незвестный пользователь {visitor}</h3>
                 </VisitorRowWrapper>
