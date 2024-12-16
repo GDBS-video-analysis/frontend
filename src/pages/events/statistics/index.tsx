@@ -1,6 +1,7 @@
 import { useGetEventPresenter } from "@entities/case/events/get-event/presenter";
 import { useGetEventVisitingStatisticsPresenter } from "@entities/case/events/get-visiting-statistics/presenter";
 import { Backarrow } from "@shared/components/backarrow";
+import { Accordion } from "@shared/components/common/accordion";
 import { Button } from "@shared/components/common/button";
 import { DatetimeFiled } from "@shared/components/common/date-time";
 import { Loader } from "@shared/components/common/loader";
@@ -11,6 +12,7 @@ import { getFormatDate } from "@shared/utils/scripts/getFormatDate";
 import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
 import { AbsentVisitors } from "@widgets/events/absent-visitors";
 import { PresentVisitors } from "@widgets/events/present-visitors";
+import { VisitorRowWrapper } from "@widgets/events/visitor-row/visitor-row-wrapper";
 import { useNavigate } from "react-router-dom";
 
 const EventStatisticsPage = () => {
@@ -70,7 +72,14 @@ const EventStatisticsPage = () => {
             options={[
               {
                 header: "Присутсвующие",
-                body: <PresentVisitors visitors={data.presentEmployees} />,
+                body: (
+                  <PresentVisitors
+                    expectedEmployees={data.presentPersons.expectedEmployees}
+                    notExpectedEmployees={
+                      data.presentPersons.notExpectedEmployees
+                    }
+                  />
+                ),
                 key: "1",
               },
               {
@@ -80,6 +89,15 @@ const EventStatisticsPage = () => {
               },
             ]}
           />
+          <section className="p-[18px] bg-default-white">
+            <Accordion header="Неизвестные">
+              {data.presentPersons.unregisterPersons.map((visitor, index) => (
+                <VisitorRowWrapper index={index + 1}>
+                  <h3>Незвестный пользователь</h3>
+                </VisitorRowWrapper>
+              ))}
+            </Accordion>
+          </section>
         </div>
       )}
     </Loader>

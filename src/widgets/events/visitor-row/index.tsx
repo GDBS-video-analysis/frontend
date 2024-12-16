@@ -1,5 +1,6 @@
 import { EmployeeShortCard } from "@shared/components/employee-short-card";
 import { IEmployee } from "@shared/interfaces/employees";
+import { VisitorRowWrapper } from "@widgets/events/visitor-row/visitor-row-wrapper";
 
 interface IVisitorRowProps {
   visitor: IEmployee;
@@ -8,9 +9,8 @@ interface IVisitorRowProps {
 
 export const VisitorRow = ({ visitor, index }: IVisitorRowProps) => {
   return (
-    <div className="flex gap-5 border-b border-gray-20 p-2 items-center hover:shadow-leftBorder hover:bg-primary-30">
-      <span className="font-medium text-sm">{index}</span>
+    <VisitorRowWrapper index={index}>
       <EmployeeShortCard employee={visitor} />
-    </div>
+    </VisitorRowWrapper>
   );
 };
