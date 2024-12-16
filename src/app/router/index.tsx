@@ -74,10 +74,13 @@ export const router = createBrowserRouter([
                 element: <UnregisterPersonPage />,
                 path: ERoutes.UNREGISTER_PERSON,
               },
+<<<<<<< HEAD
               {
                 element: <EditEmployeePage />,
                 path: ERoutes.EDIT_EMPLOYEE,
               },
+=======
+>>>>>>> b2a9ac30397ee4fc97de1db442f32db85bc2db7c
             ],
           },
         ],
