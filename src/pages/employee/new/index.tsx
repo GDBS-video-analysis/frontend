@@ -2,18 +2,13 @@ import { useNewEmployeePresenter } from "@entities/case/employees/new/presenter"
 import { NewEmployeeForm } from "@features/forms/employees/new";
 import { Button } from "@shared/components/common/button";
 import { Loader } from "@shared/components/common/loader";
-import { useDeparmentsContext } from "@shared/services/departments-provider/hook";
-import { usePostsContext } from "@shared/services/posts-provider/hook";
 import { ReactNode } from "react";
 
 const NewEmployeePage = (): ReactNode => {
-  const { data: departments, isLoading: isDepartmentLoading } =
-    useDeparmentsContext();
-  const { data: posts, isLoading: isPostsLoading } = usePostsContext();
   const { form, handleSubmit, isPending } = useNewEmployeePresenter();
 
   return (
-    <Loader isLoading={isDepartmentLoading || isPostsLoading || isPending}>
+    <Loader isLoading={isPending}>
       <form
         className="flex flex-col gap-6"
         onSubmit={handleSubmit}
@@ -21,13 +16,8 @@ const NewEmployeePage = (): ReactNode => {
       >
         <h1 className="font-bold text-[42px] text-gray-90">Новый сотрудник</h1>
         <div className="bg-default-white p-4">
-          {departments && posts && (
-            <NewEmployeeForm
-              departments={departments}
-              posts={posts}
-              form={form}
-            />
-          )}
+          <NewEmployeeForm form={form} />
+
           <Button className="mt-4" type="submit">
             Добавить сотрудника
           </Button>
