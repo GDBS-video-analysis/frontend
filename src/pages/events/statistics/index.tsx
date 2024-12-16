@@ -5,7 +5,7 @@ import { Button } from "@shared/components/common/button";
 import { DatetimeFiled } from "@shared/components/common/date-time";
 import { Loader } from "@shared/components/common/loader";
 import { LocalTabs } from "@shared/components/common/local-tabs";
-import { EEventQueryParams } from "@shared/enums/params/employee/events";
+import { EEventQueryParams } from "@shared/enums/params/events";
 import { ERoutes } from "@shared/enums/routes";
 import { getFormatDate } from "@shared/utils/scripts/getFormatDate";
 import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";

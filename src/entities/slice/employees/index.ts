@@ -32,7 +32,7 @@ export const getEmployeeVisitHistory = async (
 };
 
 export const getEmployees = async (
-  port: IEmployeeFilter
+  params: IEmployeeFilter
 ): Promise<IEmployeesDto> => {
-  return api.get<IEmployees>(`${SLUG}/employees`, { params: { ...port } });
+  return api.get<IEmployees>(`${SLUG}/employees`, { params });
 };

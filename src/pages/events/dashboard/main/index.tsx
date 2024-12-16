@@ -1,5 +1,5 @@
 import { Backarrow } from "@shared/components/backarrow";
-import { EEventQueryParams } from "@shared/enums/params/employee/events";
+import { EEventQueryParams } from "@shared/enums/params/events";
 import { ERoutes } from "@shared/enums/routes";
 import { IEventIdQueryParams } from "@shared/interfaces/params/event";
 import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
