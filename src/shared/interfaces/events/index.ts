@@ -26,7 +26,11 @@ interface ISingleEvent extends Omit<IEvent, 'videoFile' | 'visitorsCount'> {
 type ISingleEventDto = AxiosResponse<ISingleEvent>;
 
 interface IEventVisitingStatistics {
-  presentEmployees: IEmployee[];
+  presentPersons: {
+    expectedEmployees: IEmployee[];
+    notExpectedEmployees: IEmployee[];
+    unregisterPersons: number[];
+  };
   absentEmployees: IEmployee[];
 }
 
