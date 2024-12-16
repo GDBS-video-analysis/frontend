@@ -93,7 +93,7 @@ const EventStatisticsPage = () => {
             <Accordion header="Неизвестные">
               {data.presentPersons.unregisterPersons.map((visitor, index) => (
                 <VisitorRowWrapper index={index + 1}>
-                  <h3>Незвестный пользователь</h3>
+                  <h3>Незвестный пользователь {visitor}</h3>
                 </VisitorRowWrapper>
               ))}
             </Accordion>
