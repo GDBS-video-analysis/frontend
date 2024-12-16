@@ -28,13 +28,14 @@ interface IButtonProps
   extends HTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof button> {
   type?: IButtonType;
+  disabled?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, IButtonProps>(
   ({ className, intent, size, ...rest }, ref) => (
     <button
       ref={ref}
-      className={button({ className, intent, size })}
+      className={`${button({ className, intent, size })}`}
       {...rest}
     />
   )

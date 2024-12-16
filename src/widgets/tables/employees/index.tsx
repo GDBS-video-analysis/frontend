@@ -6,8 +6,12 @@ import { TableHead } from "@shared/components/common/table/table-head";
 import { TableHeadCell } from "@shared/components/common/table/table-head-cell";
 import { TableRow } from "@shared/components/common/table/table-row";
 import { TextFiled } from "@shared/components/common/text-filed";
+import { EEmployeeQueryParams } from "@shared/enums/params/employee";
+import { ERoutes } from "@shared/enums/routes";
 import { IEmployee, IEmployeeFilter } from "@shared/interfaces/employees";
+import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
 import { UseFormReturn } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 interface IEmployeesTable {
   employees: IEmployee[];
@@ -15,6 +19,7 @@ interface IEmployeesTable {
 }
 
 export const EmployeesTable = ({ employees, form }: IEmployeesTable) => {
+  const nav = useNavigate();
   const { register } = form;
   return (
     <form>
@@ -60,6 +65,15 @@ export const EmployeesTable = ({ employees, form }: IEmployeesTable) => {
             <TableRow
               key={employee.employeeID}
               className="hover:shadow-leftBorder hover:bg-primary-30"
+              onClick={() =>
+                nav(
+                  getRouteWithId(
+                    ERoutes.EMPLOYEE,
+                    EEmployeeQueryParams.EMPLOYEE_ID,
+                    employee.employeeID
+                  )
+                )
+              }
             >
               <TableCell>
                 <div className="flex gap-2 items-center font-medium">

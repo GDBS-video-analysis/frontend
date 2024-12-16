@@ -3,10 +3,14 @@ import { useGetEmployeeVisitHistoryPresenter } from "@entities/case/employees/ge
 import { Backarrow } from "@shared/components/backarrow";
 import { Loader } from "@shared/components/common/loader";
 import { EmployeeCard } from "@shared/components/employee-card";
+import { EEmployeeQueryParams } from "@shared/enums/params/employee";
 import { ERoutes } from "@shared/enums/routes";
+import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
 import { VisitHistoryTable } from "@widgets/tables/employees/visit-history";
+import { useNavigate } from "react-router-dom";
 
 const EmployeePage = () => {
+  const nav = useNavigate();
   const { data: employee, isLoading: isEmployeeLoading } =
     useGetEmployeePresenter();
   const { data: visitHistory, isLoading: isVisitHistoryLoading } =
@@ -21,7 +25,17 @@ const EmployeePage = () => {
             <section className="p-4 border border-gray-20 bg-default-white">
               <EmployeeCard
                 employee={employee}
-                button={{ label: "Изменить", handleClick: () => {} }}
+                button={{
+                  label: "Изменить",
+                  handleClick: () =>
+                    nav(
+                      getRouteWithId(
+                        ERoutes.EDIT_EMPLOYEE,
+                        EEmployeeQueryParams.EMPLOYEE_ID,
+                        employee.employeeID
+                      )
+                    ),
+                }}
               />
             </section>
           </>

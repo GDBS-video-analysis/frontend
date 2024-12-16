@@ -6,6 +6,7 @@ export enum ERoutes {
   EMPLOYEES = '/employees',
   NEW_EMPLOYEE = `${EMPLOYEES}/new`,
   EMPLOYEE = `${EMPLOYEES}/:${EEmployeeQueryParams.EMPLOYEE_ID}`,
+  EDIT_EMPLOYEE = `${EMPLOYEES}/:${EEmployeeQueryParams.EMPLOYEE_ID}/edit`,
 
   EVENTS = '/events',
   EVENT = `${EVENTS}/:${EEventQueryParams.eventId}`,

@@ -1,23 +1,26 @@
 import { useGetDepartmentsPresenter } from "@entities/case/departments/presenter";
+import { Button } from "@shared/components/common/button";
 import { Select } from "@shared/components/common/select";
 import { TextFiled } from "@shared/components/common/text-filed";
-import { IDepartment } from "@shared/interfaces/departments";
-import { INewEmployeePort } from "@shared/interfaces/employees";
-import { IPost } from "@shared/interfaces/posts";
+import { IEditEmployeePort } from "@shared/interfaces/employees";
+import { IIsPending } from "@shared/interfaces/helper-interfaces";
+import { BaseSyntheticEvent } from "react";
 import { UseFormReturn } from "react-hook-form";
 
-interface INewEmployeeFormProps {
-  departments: IDepartment[];
-  posts: IPost[];
-  form: UseFormReturn<INewEmployeePort>;
+interface IUpdateEmployeeFormProps extends IIsPending {
+  form: UseFormReturn<IEditEmployeePort>;
+  handleSubmmit(e?: BaseSyntheticEvent): void;
 }
 
-export const NewEmployeeForm = ({ form }: INewEmployeeFormProps) => {
+export const UpdateEmployeeForm = ({
+  form,
+  handleSubmmit,
+  isPending,
+}: IUpdateEmployeeFormProps) => {
   const {
     register,
     formState: { errors },
   } = form;
-
   const {
     departmentsSelectOptions,
     postsSelectOptions,
@@ -25,16 +28,17 @@ export const NewEmployeeForm = ({ form }: INewEmployeeFormProps) => {
   } = useGetDepartmentsPresenter();
 
   return (
-    <div className="w-[616px]">
-      <h1 className="mb-6 text-lg font-bold text-gray-90">
+    <form onSubmit={handleSubmmit} className="p-4 bg-default-white">
+      <h3 className="text-lg text-gray-90 font-bold mb-6">
         Персональные данные
-      </h1>
-      <div className="flex flex-col gap-4">
+      </h3>
+      <section className="flex flex-col w-[616px] gap-4">
         <TextFiled
           label="Имя"
           required={true}
           placeholder="Введите имя"
           error={errors.firstName?.message}
+          disabled={isPending}
           {...register("firstName")}
         />
         <TextFiled
@@ -42,18 +46,21 @@ export const NewEmployeeForm = ({ form }: INewEmployeeFormProps) => {
           required={true}
           placeholder="Введите фамилию"
           error={errors.lastName?.message}
+          disabled={isPending}
           {...register("lastName")}
         />
         <TextFiled
           label="Отчество"
           placeholder="Введите отчество"
           error={errors.patronymic?.message}
+          disabled={isPending}
           {...register("patronymic")}
         />
         <Select
           label="Подразделение"
           required={true}
           options={departmentsSelectOptions}
+          disabled={isPending}
           onChange={handleDepartmentChange}
         />
         <p className="text-xs text-gray-90">
@@ -64,6 +71,7 @@ export const NewEmployeeForm = ({ form }: INewEmployeeFormProps) => {
           required={true}
           options={postsSelectOptions}
           error={errors.postID?.message}
+          disabled={isPending}
           {...register("postID")}
         />
         <TextFiled
@@ -71,9 +79,13 @@ export const NewEmployeeForm = ({ form }: INewEmployeeFormProps) => {
           placeholder="Введите телефон"
           required={true}
           error={errors.phone?.message}
+          disabled={isPending}
           {...register("phone")}
         />
-      </div>
-    </div>
+        <Button type="submit" disabled={isPending} className="w-fit">
+          Сохранить{isPending && "..."}
+        </Button>
+      </section>
+    </form>
   );
 };
