@@ -2,9 +2,12 @@ import { useGetEmployeesPresenter } from "@entities/case/employees/get-employees
 import { Button } from "@shared/components/common/button";
 import { Loader } from "@shared/components/common/loader";
 import { Pagination } from "@shared/components/common/pagination";
+import { ERoutes } from "@shared/enums/routes";
 import { EmployeesTable } from "@widgets/tables/employees";
+import { useNavigate } from "react-router-dom";
 
 const EmployeesPage = () => {
+  const nav = useNavigate();
   const { form, data, isLoading, handlePageChange } =
     useGetEmployeesPresenter();
   return (
@@ -13,7 +16,9 @@ const EmployeesPage = () => {
         <h1 className="text-gray-90 font-bold text-[42px]">
           Реестр сотрудников
         </h1>
-        <Button>Добавить сотрудника</Button>
+        <Button onClick={() => nav(ERoutes.NEW_EMPLOYEE)}>
+          Добавить сотрудника
+        </Button>
       </section>
 
       <Loader isLoading={isLoading}>

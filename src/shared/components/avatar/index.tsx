@@ -18,7 +18,7 @@ export const Avatar = ({
 }: IAvatarProps) => {
   return (
     <div
-      className={`flex justify-center items-center w-[48px] h-[48px] bg-gray-10 ${
+      className={`flex justify-center items-center w-[48px] h-[48px] bg-gray-10 bg-center ${
         form === "circle" && "rounded-full"
       } bg-cover`}
       style={{

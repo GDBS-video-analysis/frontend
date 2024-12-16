@@ -1,6 +1,9 @@
 import { IEmployee } from '@shared/interfaces/employees';
 import { IFile } from '@shared/interfaces/file';
-import { IPaginationFilter } from '@shared/interfaces/helper-interfaces';
+import {
+  IPaginationFilter,
+  IResponseWithPagination,
+} from '@shared/interfaces/helper-interfaces';
 import { AxiosResponse } from 'axios';
 
 interface IEvent {
@@ -12,6 +15,8 @@ interface IEvent {
   name: string;
   analisysStatus: number;
 }
+
+type IEvents = IResponseWithPagination<IEvent>;
 
 type IUpdateEventPort = Omit<IEvent, 'videoFile' | 'visitorsCount'>;
 
@@ -48,11 +53,11 @@ interface IUploadEventVideoFilePort {
   videoFile: FileList;
 }
 
-interface IEventsPort extends IPaginationFilter {
+interface IEventsFilter extends IPaginationFilter {
   search?: string;
 }
 
-type IEventsDto = AxiosResponse<>;
+type IEventsDto = AxiosResponse<IEvents>;
 
 export type {
   IEvent,
@@ -64,4 +69,7 @@ export type {
   IEventVisitingStatisticsDto,
   IExpectedEmployeesPort,
   IUploadEventVideoFilePort,
+  IEventsDto,
+  IEventsFilter,
+  IEvents,
 };

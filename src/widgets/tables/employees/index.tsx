@@ -64,7 +64,7 @@ export const EmployeesTable = ({ employees, form }: IEmployeesTable) => {
           {employees.map((employee) => (
             <TableRow
               key={employee.employeeID}
-              className="hover:shadow-leftBorder hover:bg-primary-30"
+              className="hover:shadow-leftBorder hover:bg-primary-30 cursor-pointer"
               onClick={() =>
                 nav(
                   getRouteWithId(

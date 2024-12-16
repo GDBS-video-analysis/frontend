@@ -1,4 +1,7 @@
 import {
+  IEvents,
+  IEventsDto,
+  IEventsFilter,
   IEventVisitingStatistics,
   IEventVisitingStatisticsDto,
   IExpectedEmployeesPort,
@@ -57,4 +60,6 @@ export const deleteEvent = (eventId: number): Promise<void> => {
   return api.delete(`${SLUG}/${eventId}`);
 };
 
-export const getEvents;
+export const getEvents = (params: IEventsFilter): Promise<IEventsDto> => {
+  return api.get<IEvents>(`${SLUG}/events`, { params });
+};

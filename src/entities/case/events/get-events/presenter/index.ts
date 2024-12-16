@@ -1,28 +1,31 @@
-import { useGetExpectedEmployeesUseCase } from '@entities/case/employees/get-expected-employees/use-case';
+import { useGetEventsUseCase } from '@entities/case/events/get-events/use-case';
 import { QuantityPerPage } from '@shared/constants/pagination';
-import { EEmployeeQueryParams } from '@shared/enums/params/employee';
+import { EEventQueryParams } from '@shared/enums/params/events';
 import { EPaginationQueryParams } from '@shared/enums/params/pagination';
 import { ESettings } from '@shared/enums/settings';
-import { IEmployeeFilter } from '@shared/interfaces/employees';
+import { IEventsDto, IEventsFilter } from '@shared/interfaces/events';
+import { UseQueryResult } from '@tanstack/react-query';
 import { debounce, omit } from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormReturn } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 
-export const useGetEmployeesPresenter = () => {
+type IUseGetEventsPresenterReturn = UseQueryResult<IEventsDto> & {
+  form: UseFormReturn<IEventsFilter>;
+  handlePageChange(page: number): void;
+};
+
+export const useGetEventsPresenter = (): IUseGetEventsPresenterReturn => {
   const [params, setParams] = useSearchParams();
   const page = Number(params.get(EPaginationQueryParams.PAGE));
-  const [filter, setFilter] = useState<IEmployeeFilter>({
+  const [filter, setFilter] = useState<IEventsFilter>({
     quantityPerPage: QuantityPerPage,
     page: !isNaN(page) && page !== 0 ? page : 1,
-    searchName: params.get(EEmployeeQueryParams.SEARCH_NAME) ?? '',
-    searchPost: params.get(EEmployeeQueryParams.SEARCH_POST) ?? '',
-    searchDepartment: params.get(EEmployeeQueryParams.SEARCH_DEPARTMENT) ?? '',
+    search: params.get(EEventQueryParams.search) ?? '',
   });
+  const response = useGetEventsUseCase(filter);
 
-  const { data, isLoading } = useGetExpectedEmployeesUseCase(filter);
-
-  const form = useForm<IEmployeeFilter>({ defaultValues: filter });
+  const form = useForm<IEventsFilter>({ defaultValues: filter });
 
   const debouncedHandler = useMemo(() => {
     return debounce((value): void => {
@@ -52,9 +55,8 @@ export const useGetEmployeesPresenter = () => {
   }, [form]);
 
   return {
-    form,
-    isLoading,
-    data,
     handlePageChange,
+    form,
+    ...response,
   };
 };
