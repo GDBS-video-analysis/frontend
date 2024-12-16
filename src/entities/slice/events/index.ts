@@ -56,3 +56,5 @@ export const uploadEventVideoFile = ({
 export const deleteEvent = (eventId: number): Promise<void> => {
   return api.delete(`${SLUG}/${eventId}`);
 };
+
+export const getEvents;
