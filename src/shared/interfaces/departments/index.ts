@@ -1,6 +1,12 @@
+import { IPost } from '@shared/interfaces/posts';
+import { AxiosResponse } from 'axios';
+
 interface IDepartment {
-  departmentId: string;
+  departmentID: number;
   name: string;
+  posts: IPost[];
 }
 
-export type { IDepartment };
+type IDepartmentDto = AxiosResponse<IDepartment[]>;
+
+export type { IDepartment, IDepartmentDto };

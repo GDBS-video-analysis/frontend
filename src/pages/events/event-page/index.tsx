@@ -123,7 +123,7 @@ const EventPage = () => {
             header="Удаление мероприятия"
           >
             <form onSubmit={handleDeleteEventSubmit}>
-              <p>
+              <div>
                 Вы действительно хотите удалить мероприятие{" "}
                 <b>{deleteEventForm.getValues("name")}</b>?
                 <div className="flex gap-4 justify-end mt-6">
@@ -132,7 +132,7 @@ const EventPage = () => {
                   </Button>
                   <Button onClick={handleToggleDeleteEventModal}>Нет</Button>
                 </div>
-              </p>
+              </div>
             </form>
           </Modal>
           <Modal

@@ -1,15 +1,6 @@
-import { IDepartment } from '@shared/interfaces/departments';
-import { times } from 'lodash';
+import { IDepartment, IDepartmentDto } from '@shared/interfaces/departments';
+import { api } from '@shared/lib/api';
 
-export const getDepartments = async (): Promise<IDepartment[]> => {
-  return new Promise((res) => {
-    setTimeout(() => {
-      res(
-        times(5, (num) => ({
-          departmentId: num.toString(),
-          name: 'department ' + num,
-        }))
-      );
-    }, 500);
-  });
+export const getDepartments = async (): Promise<IDepartmentDto> => {
+  return api.get<IDepartment[]>('/employees/postsByDepartments');
 };

@@ -66,6 +66,34 @@ interface IUnregisterPersonPort {
   unregisterPersonId: number;
 }
 
+interface IEditEmployee {
+  employeeID: number;
+  biometrics: number[];
+  postID: number;
+  departmentID: string;
+  firstName: string;
+  lastName: string;
+  patronymic?: string;
+  phone: string;
+}
+
+type IEditEmployeePort = Omit<
+  IEditEmployee,
+  'biometrics' | 'biometrics' | 'departmentID'
+>;
+
+interface IEditEmployeeBiometryPort {
+  employeeId: number;
+  biometry: FileList;
+}
+
+interface IDeleteEmployeeBiometryPort {
+  employeeId: number;
+  biometryID: number;
+}
+
+type IEditEmployeeDto = AxiosResponse<IEditEmployee>;
+
 export type {
   INewEmployeePort,
   IEmployee,
@@ -81,4 +109,9 @@ export type {
   IUnregisterPerson,
   IUnregisterPersonDto,
   IUnregisterPersonPort,
+  IEditEmployeePort,
+  IEditEmployee,
+  IDeleteEmployeeBiometryPort,
+  IEditEmployeeBiometryPort,
+  IEditEmployeeDto,
 };

@@ -1,7 +1,6 @@
 interface IPost {
-  postId: string;
+  postID: number;
   name: string;
-  departmentId: number;
 }
 
 export type { IPost };
