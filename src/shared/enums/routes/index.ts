@@ -1,5 +1,5 @@
 import { EEmployeeQueryParams } from '@shared/enums/params/employee';
-import { EEventQueryParams } from '@shared/enums/params/employee/events';
+import { EEventQueryParams } from '@shared/enums/params/events';
 
 export enum ERoutes {
   EMPLOYEES = '/employees',

@@ -18,7 +18,9 @@ const EventStatisticsPage = LazyLoader(
 const DashboardPage = LazyLoader(
   lazy(() => import("@pages/events/dashboard/main"))
 );
-
+const EmployeesPage = LazyLoader(
+  lazy(() => import("@pages/employee/employees-page"))
+);
 export const router = createBrowserRouter([
   {
     element: <BaseLayout />,
@@ -52,6 +54,10 @@ export const router = createBrowserRouter([
               {
                 element: <DashboardPage />,
                 path: ERoutes.EVENT_DASHBOARD,
+              },
+              {
+                element: <EmployeesPage />,
+                path: ERoutes.EMPLOYEES,
               },
             ],
           },

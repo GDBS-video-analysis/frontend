@@ -1,4 +1,4 @@
-import { useGetExpectedEmployeesPresenter } from "@entities/case/employees/get-employees/presenter";
+import { useGetExpectedEmployeesPresenter } from "@entities/case/employees/get-expected-employees/presenter";
 import { usePutExpectedEmployeesPresenter } from "@entities/case/events/put-expected-employees/presenter";
 import { Avatar } from "@shared/components/avatar";
 import { Button } from "@shared/components/common/button";
