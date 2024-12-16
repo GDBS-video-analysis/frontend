@@ -11,8 +11,8 @@ export const List = ({ options, header, className }: IListProps): ReactNode => {
     <div className={`text-xl text-gray-90 ${className}`}>
       {header}:
       <ul className="list-decimal ms-4 text-sm mt-2">
-        {options.map((option) => (
-          <li key={null}>{option}</li>
+        {options.map((option, index) => (
+          <li key={index}>{option}</li>
         ))}
       </ul>
     </div>

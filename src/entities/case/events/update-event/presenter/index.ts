@@ -27,7 +27,6 @@ export const useUpdateEventPresenter = ({
   const { mutateAsync, isPending } = useUpdateEventUseCase(onSuccesCallback);
 
   const handleSubmit = form.handleSubmit((data) => {
-    console.log(new Date(`${data.date} ${data.time}`).toJSON());
     mutateAsync({
       dateTime: new Date(`${data.date} ${data.time}`).toJSON(),
       name: data.name,

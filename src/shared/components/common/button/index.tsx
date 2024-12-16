@@ -32,10 +32,11 @@ interface IButtonProps
 }
 
 export const Button = forwardRef<HTMLButtonElement, IButtonProps>(
-  ({ className, intent, size, ...rest }, ref) => (
+  ({ className, intent, size, disabled = false, ...rest }, ref) => (
     <button
       ref={ref}
       className={`${button({ className, intent, size })}`}
+      disabled={disabled}
       {...rest}
     />
   )

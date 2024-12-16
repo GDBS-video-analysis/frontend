@@ -18,7 +18,10 @@ interface IEvent {
 
 type IEvents = IResponseWithPagination<IEvent>;
 
-type IUpdateEventPort = Omit<IEvent, 'videoFile' | 'visitorsCount'>;
+type IUpdateEventPort = Omit<
+  IEvent,
+  'videoFile' | 'visitorsCount' | 'analisysStatus'
+>;
 
 interface IUpdateEventFormPort extends Omit<IUpdateEventPort, 'dateTime'> {
   date: string;
