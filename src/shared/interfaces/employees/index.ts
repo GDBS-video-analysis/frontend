@@ -36,6 +36,36 @@ interface IEmployeeFilter extends IPaginationFilter {
   searchDepartment?: string;
 }
 
+interface IEventEmployee {
+  isPresent: boolean;
+  employee: IEmployee;
+  videoMarks?: string[];
+}
+
+type IEventEmployeeDto = AxiosResponse<IEventEmployee>;
+
+interface IEventEmployeePort {
+  eventId: number;
+  employeeId: number;
+}
+
+interface IUnregisterPerson {
+  unregisterPersonID: number;
+  videoFileMarks: [
+    {
+      mark: string;
+      photoID: number;
+    }
+  ];
+}
+
+type IUnregisterPersonDto = AxiosResponse<IUnregisterPerson>;
+
+interface IUnregisterPersonPort {
+  eventId: number;
+  unregisterPersonId: number;
+}
+
 export type {
   INewEmployeePort,
   IEmployee,
@@ -45,4 +75,10 @@ export type {
   IEmployeeFilter,
   IEmployeesDto,
   IEmployees,
+  IEventEmployee,
+  IEventEmployeeDto,
+  IEventEmployeePort,
+  IUnregisterPerson,
+  IUnregisterPersonDto,
+  IUnregisterPersonPort,
 };
