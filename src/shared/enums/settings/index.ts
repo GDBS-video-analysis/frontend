@@ -1,3 +1,3 @@
 export enum ESettings {
-  DEBAUNCE_DELAY = 500,
+  DEBAUNCE_DELAY = 1000,
 }

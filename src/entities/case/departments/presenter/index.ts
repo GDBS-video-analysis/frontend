@@ -9,44 +9,51 @@ type IUseGetDepartmentsPresenterReturn = UseQueryResult<IDepartmentDto> & {
   postsSelectOptions: ISelectOption[];
   handleDepartmentChange(e: React.FormEvent<HTMLSelectElement>): void;
 };
+export const useGetDepartmentsPresenter = (
+  reverseValues = false
+): IUseGetDepartmentsPresenterReturn => {
+  const [selectedDepartment, setSelectedDepartment] = useState<number>();
 
-export const useGetDepartmentsPresenter =
-  (): IUseGetDepartmentsPresenterReturn => {
-    const [selectedDepartment, setSelectedDepartment] = useState<number>();
+  const response = useGetDepartmentsUseCase();
 
-    const response = useGetDepartmentsUseCase();
-
-    const handleDepartmentChange = (e: React.FormEvent<HTMLSelectElement>) => {
-      setSelectedDepartment(Number(e.currentTarget.value));
-    };
-
-    const departmentsSelectOptions: ISelectOption[] = useMemo(
-      () =>
-        response.data
-          ? response.data?.data.map((department) => ({
-              label: department.name,
-              value: department.departmentID.toString(),
-            }))
-          : [],
-      [response]
+  const handleDepartmentChange = (e: React.FormEvent<HTMLSelectElement>) => {
+    const department = departmentsSelectOptions.find(
+      (dep) => dep.value === e.currentTarget.value
     );
-
-    const postsSelectOptions: ISelectOption[] = useMemo(() => {
-      const department = response.data?.data.find(
-        (department) => department.departmentID === selectedDepartment
-      );
-      if (department)
-        return department?.posts.map((post) => ({
-          label: post.name,
-          value: post.postID.toString(),
-        }));
-      return [];
-    }, [response, selectedDepartment]);
-
-    return {
-      postsSelectOptions,
-      departmentsSelectOptions,
-      handleDepartmentChange,
-      ...response,
-    };
+    setSelectedDepartment(department?.index);
   };
+
+  const departmentsSelectOptions: ISelectOption[] = useMemo(
+    () =>
+      response.data
+        ? response.data?.data.map((department) => ({
+            label: department.name,
+            value: reverseValues
+              ? department.name
+              : department.departmentID.toString(),
+            index: department.departmentID,
+          }))
+        : [],
+    [response, reverseValues]
+  );
+
+  const postsSelectOptions: ISelectOption[] = useMemo(() => {
+    const department = response.data?.data.find(
+      (department) => department.departmentID === selectedDepartment
+    );
+    if (department)
+      return department?.posts.map((post) => ({
+        label: post.name,
+        value: reverseValues ? post.name : post.postID.toString(),
+        index: post.postID,
+      }));
+    return [];
+  }, [response, selectedDepartment, reverseValues]);
+
+  return {
+    postsSelectOptions,
+    departmentsSelectOptions,
+    handleDepartmentChange,
+    ...response,
+  };
+};

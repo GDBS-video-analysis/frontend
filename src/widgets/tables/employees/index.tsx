@@ -1,4 +1,6 @@
+import { useGetDepartmentsPresenter } from "@entities/case/departments/presenter";
 import { Avatar } from "@shared/components/avatar";
+import { Select } from "@shared/components/common/select";
 import { Table } from "@shared/components/common/table";
 import { TableBody } from "@shared/components/common/table/table-body";
 import { TableCell } from "@shared/components/common/table/table-cell";
@@ -10,6 +12,7 @@ import { EEmployeeQueryParams } from "@shared/enums/params/employee";
 import { ERoutes } from "@shared/enums/routes";
 import { IEmployee, IEmployeeFilter } from "@shared/interfaces/employees";
 import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
+import { FormEvent } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -19,8 +22,17 @@ interface IEmployeesTable {
 }
 
 export const EmployeesTable = ({ employees, form }: IEmployeesTable) => {
+  const {
+    departmentsSelectOptions,
+    postsSelectOptions,
+    handleDepartmentChange,
+  } = useGetDepartmentsPresenter(true);
   const nav = useNavigate();
   const { register } = form;
+  const onDepartmentChange = (e: FormEvent<HTMLSelectElement>) => {
+    form.setValue("searchDepartment", e.currentTarget.value);
+    handleDepartmentChange(e);
+  };
   return (
     <form>
       <Table>
@@ -45,17 +57,15 @@ export const EmployeesTable = ({ employees, form }: IEmployeesTable) => {
               />
             </TableHeadCell>
             <TableHeadCell>
-              <TextFiled
-                placeholder="Пост"
-                background="#FFFFFF"
+              <Select
+                options={postsSelectOptions}
                 {...register("searchPost")}
               />
             </TableHeadCell>
             <TableHeadCell>
-              <TextFiled
-                placeholder="Подразделение"
-                background="#FFFFFF"
-                {...register("searchDepartment")}
+              <Select
+                options={departmentsSelectOptions}
+                onChange={onDepartmentChange}
               />
             </TableHeadCell>
           </TableRow>
