@@ -6,14 +6,20 @@ import { TableHead } from "@shared/components/common/table/table-head";
 import { TableHeadCell } from "@shared/components/common/table/table-head-cell";
 import { TableHeadRow } from "@shared/components/common/table/table-head-row";
 import { TableRow } from "@shared/components/common/table/table-row";
+import { ERoutes } from "@shared/enums/routes";
 import { IEmployeeVisitHistory } from "@shared/interfaces/employees";
+import { IEmployeeIdQueryParams } from "@shared/interfaces/params/employee";
+import { getEventsPaths } from "@shared/utils/scripts/getEventsPaths";
 import { getFormatDate } from "@shared/utils/scripts/getFormatDate";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface IVisitHistoryProps {
   visitHistory: IEmployeeVisitHistory;
 }
 
 export const VisitHistoryTable = ({ visitHistory }: IVisitHistoryProps) => {
+  const { employeeId } = useParams() as unknown as IEmployeeIdQueryParams;
+  const nav = useNavigate();
   return (
     <Table>
       <colgroup>
@@ -43,7 +49,19 @@ export const VisitHistoryTable = ({ visitHistory }: IVisitHistoryProps) => {
               </div>
             </TableCell>
             <TableCell>
-              <Button intent="outlined" size="small">
+              <Button
+                intent="outlined"
+                size="small"
+                onClick={() =>
+                  nav(
+                    getEventsPaths(
+                      ERoutes.EVENT_EMPLOYEE,
+                      event.eventID,
+                      employeeId
+                    )
+                  )
+                }
+              >
                 Посещение
               </Button>
             </TableCell>
