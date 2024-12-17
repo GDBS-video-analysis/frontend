@@ -3,7 +3,6 @@ import { useGetEventVisitingStatisticsPresenter } from "@entities/case/events/ge
 import { Backarrow } from "@shared/components/backarrow";
 import { Accordion } from "@shared/components/common/accordion";
 import { Button } from "@shared/components/common/button";
-import { DatetimeFiled } from "@shared/components/common/date-time";
 import { Loader } from "@shared/components/common/loader";
 import { LocalTabs } from "@shared/components/common/local-tabs";
 import { EEventQueryParams } from "@shared/enums/params/events";
@@ -40,35 +39,21 @@ const EventStatisticsPage = () => {
     <Loader isLoading={isLoading}>
       {data && event && (
         <div className="flex flex-col gap-6">
-          <section>
-            <Backarrow
-              to={getRouteWithId(
-                ERoutes.EVENT,
-                EEventQueryParams.eventId,
-                event.eventID
-              )}
-              label={`${event.name} ${getFormatDate(event.dateTime).date}`}
-            />
-            <h1 className="text-gray-90 font-bold text-[42px]">
-              Статистика посещения
-            </h1>
-          </section>
+          <section className="flex items-center justify-between">
+            <span>
+              <Backarrow
+                to={getRouteWithId(
+                  ERoutes.EVENT,
+                  EEventQueryParams.eventId,
+                  event.eventID
+                )}
+                label={`${event.name} ${getFormatDate(event.dateTime).date}`}
+              />
+              <h1 className="text-gray-90 font-bold text-[42px]">
+                Статистика посещения
+              </h1>
+            </span>
 
-          <div className="flex items-end">
-            <DatetimeFiled
-              type="time"
-              className="w-[180px]"
-              style={{ background: "#FFFFFF" }}
-              label="Время начала"
-            />
-            <div className="bg-gray-30 w-12 h-12"></div>
-            <DatetimeFiled
-              type="time"
-              className="w-[180px]"
-              placeholder="Время конца"
-              style={{ background: "#FFFFFF" }}
-              label="Время конца"
-            />
             <Button
               intent="outlined"
               className="ms-6"
@@ -84,7 +69,7 @@ const EventStatisticsPage = () => {
             >
               Дашборд
             </Button>
-          </div>
+          </section>
           <LocalTabs
             options={[
               {
