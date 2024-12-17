@@ -21,7 +21,7 @@ const EventsPage = () => {
     <div className="flex flex-col gap-6 justify-center">
       <section className="flex justify-between">
         <h1 className="text-gray-90 font-bold text-[42px]">
-          Реестр сотрудников
+          Реестр мероприятий
         </h1>
         <Button onClick={handleOpenModal}>Добавить мероприятие</Button>
       </section>

@@ -11,8 +11,14 @@ import { FileUploader } from "@shared/components/common/file-uploader";
 import { useUploadEventVideoFilePresenter } from "@entities/case/events/upload-video-file/presenter";
 import { useDeleteEventPresenter } from "@entities/case/events/delete/presenter";
 import { ISingleEvent } from "@shared/interfaces/events";
+import { useNavigate } from "react-router-dom";
+import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
+import { ERoutes } from "@shared/enums/routes";
+import { EEventQueryParams } from "@shared/enums/params/events";
 
 const EventPage = () => {
+  const nav = useNavigate();
+
   const {
     form: updateEventform,
     handleSubmit: handleUpdateEventSubmit,
@@ -54,6 +60,24 @@ const EventPage = () => {
       {data && (
         <>
           <div className="flex flex-col gap-6">
+            <section className="flex justify-between">
+              <h1 className="text-gray-90 font-bold text-[42px]">
+                {data.name}
+              </h1>
+              <Button
+                onClick={() =>
+                  nav(
+                    getRouteWithId(
+                      ERoutes.EVENT_STATISTICS,
+                      EEventQueryParams.eventId,
+                      data.eventID
+                    )
+                  )
+                }
+              >
+                Статистика посещения
+              </Button>
+            </section>
             <div className="bg-default-white p-4">
               <div className="flex justify-between">
                 <h2 className="text-gray-90 text-lg font-bold">Информация</h2>
