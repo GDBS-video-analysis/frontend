@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "dev"
+      - "prod"
 
 jobs:
   build-and-push:
@@ -19,7 +20,7 @@ jobs:
           docker pull -q ${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME}
       - name: Build
         run: |
-          docker build --cache-from=${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME} -q -t ${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME} .
+          docker build --cache-from=${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME} -f Dockerfile.${GITHUB_REF_NAME} -q -t ${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME} .
           docker push -q ${{ secrets.DOCKER_HUB_USERNAME }}/gdbs_front:${GITHUB_REF_NAME}
   deploy:
     needs: build-and-push
