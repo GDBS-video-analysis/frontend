@@ -62,6 +62,17 @@ interface IEventsFilter extends IPaginationFilter {
 
 type IEventsDto = AxiosResponse<IEvents>;
 
+interface IEventPort {
+  name: string;
+  dateTime: string;
+  description?: string;
+}
+
+interface IAddEventPort extends Omit<IEventPort, 'dateTime'> {
+  date: string;
+  time: string;
+}
+
 export type {
   IEvent,
   IUpdateEventPort,
@@ -75,4 +86,6 @@ export type {
   IEventsDto,
   IEventsFilter,
   IEvents,
+  IEventPort,
+  IAddEventPort,
 };

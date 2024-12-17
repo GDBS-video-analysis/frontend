@@ -1,4 +1,5 @@
 import {
+  IEventPort,
   IEvents,
   IEventsDto,
   IEventsFilter,
@@ -62,4 +63,10 @@ export const deleteEvent = (eventId: number): Promise<void> => {
 
 export const getEvents = (params: IEventsFilter): Promise<IEventsDto> => {
   return api.get<IEvents>(`${SLUG}/events`, { params });
+};
+
+export const addEvent = async (
+  port: IEventPort
+): Promise<AxiosResponse<void>> => {
+  return api.post(`${SLUG}/event`, port);
 };
