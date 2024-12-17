@@ -1,4 +1,4 @@
-const API_URL = 'https://api.dev.176.108.248.181.nip.io';
+const API_URL = import.meta.env.VITE_API;
 const FILES_API = `${API_URL}/files`;
 
 export { API_URL, FILES_API };

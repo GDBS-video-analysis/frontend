@@ -25,7 +25,7 @@ export const UpdateEmployeeForm = ({
     departmentsSelectOptions,
     postsSelectOptions,
     handleDepartmentChange,
-  } = useGetDepartmentsPresenter();
+  } = useGetDepartmentsPresenter({});
 
   return (
     <form onSubmit={handleSubmmit} className="p-4 bg-default-white">

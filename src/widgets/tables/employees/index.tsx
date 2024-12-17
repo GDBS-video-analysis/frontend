@@ -12,7 +12,6 @@ import { EEmployeeQueryParams } from "@shared/enums/params/employee";
 import { ERoutes } from "@shared/enums/routes";
 import { IEmployee, IEmployeeFilter } from "@shared/interfaces/employees";
 import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
-import { FormEvent } from "react";
 import { UseFormReturn } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -22,17 +21,13 @@ interface IEmployeesTable {
 }
 
 export const EmployeesTable = ({ employees, form }: IEmployeesTable) => {
-  const {
-    departmentsSelectOptions,
-    postsSelectOptions,
-    handleDepartmentChange,
-  } = useGetDepartmentsPresenter(true);
+  const { departmentsSelectOptions, postsSelectOptions } =
+    useGetDepartmentsPresenter({
+      reverseValues: true,
+      departmentValue: form.getValues("searchDepartment"),
+    });
   const nav = useNavigate();
   const { register } = form;
-  const onDepartmentChange = (e: FormEvent<HTMLSelectElement>) => {
-    form.setValue("searchDepartment", e.currentTarget.value);
-    handleDepartmentChange(e);
-  };
   return (
     <form>
       <Table>
@@ -59,13 +54,17 @@ export const EmployeesTable = ({ employees, form }: IEmployeesTable) => {
             <TableHeadCell>
               <Select
                 options={postsSelectOptions}
+                value={form.getValues("searchPost")}
+                background="#FFFFFF"
                 {...register("searchPost")}
               />
             </TableHeadCell>
             <TableHeadCell>
               <Select
                 options={departmentsSelectOptions}
-                onChange={onDepartmentChange}
+                value={form.getValues("searchDepartment")}
+                background="#FFFFFF"
+                {...register("searchDepartment")}
               />
             </TableHeadCell>
           </TableRow>
