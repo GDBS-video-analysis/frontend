@@ -22,6 +22,7 @@ export const useGetEventPresenter = (): IUseGetEventPresenterReturn => {
 
   const toggleFormDisabled = () => {
     setIsFormDisabled((prev) => !prev);
+    form.reset(data?.data);
   };
 
   const { form, handleSubmit, isPending } = useUpdateEventPresenter({

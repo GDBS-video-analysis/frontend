@@ -61,7 +61,6 @@ export const FileUploader = forwardRef<HTMLInputElement, IFileUploaderProps>(
             options={[
               `Дата загрузки: ${getFormatDate(file.createdAt).date}`,
               `Размер: ${file.size} Kb`,
-              `Длительность: неизвестно`,
             ]}
           />
           <Modal

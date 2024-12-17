@@ -6,11 +6,13 @@ import { TableHead } from "@shared/components/common/table/table-head";
 import { TableHeadCell } from "@shared/components/common/table/table-head-cell";
 import { TableHeadRow } from "@shared/components/common/table/table-head-row";
 import { TableRow } from "@shared/components/common/table/table-row";
+import { EEventQueryParams } from "@shared/enums/params/events";
 import { ERoutes } from "@shared/enums/routes";
 import { IEmployeeVisitHistory } from "@shared/interfaces/employees";
 import { IEmployeeIdQueryParams } from "@shared/interfaces/params/employee";
 import { getEventsPaths } from "@shared/utils/scripts/getEventsPaths";
 import { getFormatDate } from "@shared/utils/scripts/getFormatDate";
+import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
 import { useNavigate, useParams } from "react-router-dom";
 
 interface IVisitHistoryProps {
@@ -38,6 +40,15 @@ export const VisitHistoryTable = ({ visitHistory }: IVisitHistoryProps) => {
           <TableRow
             key={event.eventID}
             className="[&_p]:hover:text-primary-90 cursor-pointer"
+            onClick={() =>
+              nav(
+                getRouteWithId(
+                  ERoutes.EVENT,
+                  EEventQueryParams.eventId,
+                  event.eventID
+                )
+              )
+            }
           >
             <TableCell className="text-sm">{index}</TableCell>
             <TableCell>

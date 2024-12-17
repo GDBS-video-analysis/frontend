@@ -6,7 +6,6 @@ import { Modal } from "@shared/components/common/modal";
 import { useModal } from "@shared/components/common/modal/hooks";
 import { EmployeeShortCard } from "@shared/components/employee-short-card";
 import { ExpectedEmployeesTable } from "@widgets/tables/employees/expected-employees";
-import deleteIcon from "@shared/assets/icons/close-outline.svg";
 import { FileUploader } from "@shared/components/common/file-uploader";
 import { useUploadEventVideoFilePresenter } from "@entities/case/events/upload-video-file/presenter";
 import { useDeleteEventPresenter } from "@entities/case/events/delete/presenter";
@@ -15,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { getRouteWithId } from "@shared/utils/scripts/getRouteWithId";
 import { ERoutes } from "@shared/enums/routes";
 import { EEventQueryParams } from "@shared/enums/params/events";
+import { Backarrow } from "@shared/components/backarrow";
 
 const EventPage = () => {
   const nav = useNavigate();
@@ -61,9 +61,13 @@ const EventPage = () => {
         <>
           <div className="flex flex-col gap-6">
             <section className="flex justify-between">
-              <h1 className="text-gray-90 font-bold text-[42px]">
-                {data.name}
-              </h1>
+              <span>
+                <Backarrow to={ERoutes.EVENTS} label="Реестр мероприятий" />
+                <h1 className="text-gray-90 font-bold text-[42px]">
+                  {data.name}
+                </h1>
+              </span>
+
               <Button
                 onClick={() =>
                   nav(
@@ -100,7 +104,6 @@ const EventPage = () => {
                 {data.expectedEmployees?.map((employee) => (
                   <div className="py-2 px-3 border-t border-gray-20 flex justify-between">
                     <EmployeeShortCard employee={employee} />
-                    <img src={deleteIcon} className="cursor-pointer" />
                   </div>
                 ))}
               </div>
