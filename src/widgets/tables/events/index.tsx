@@ -4,6 +4,7 @@ import { TableCell } from "@shared/components/common/table/table-cell";
 import { TableHead } from "@shared/components/common/table/table-head";
 import { TableHeadCell } from "@shared/components/common/table/table-head-cell";
 import { TableRow } from "@shared/components/common/table/table-row";
+import { VideoStatus } from "@shared/components/video-status";
 import { EEventQueryParams } from "@shared/enums/params/events";
 import { ERoutes } from "@shared/enums/routes";
 import { IEvent } from "@shared/interfaces/events";
@@ -54,12 +55,14 @@ export const EventsTable = ({ events }: IEventsTableProps) => {
             <TableCell>{getFormatDate(event.dateTime).date}</TableCell>
             <TableCell>{getFormatDate(event.dateTime).time}</TableCell>
             <TableCell>{event.visitorsCount}</TableCell>
-            <TableCell>{event.analisysStatus}</TableCell>
+            <TableCell>
+              <VideoStatus status={event.analisysStatus} />
+            </TableCell>
           </TableRow>
         ))}
         {events.length === 0 && (
           <TableRow>
-            <TableCell colSpan={3}>Здесь пока ничего нет</TableCell>
+            <TableCell colSpan={5}>Здесь пока ничего нет</TableCell>
           </TableRow>
         )}
       </TableBody>

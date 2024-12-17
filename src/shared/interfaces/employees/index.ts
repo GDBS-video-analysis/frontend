@@ -70,7 +70,7 @@ interface IEditEmployee {
   employeeID: number;
   biometrics: number[];
   postID: number;
-  departmentID: string;
+  departmentID: number;
   firstName: string;
   lastName: string;
   patronymic?: string;
@@ -81,6 +81,7 @@ type IEditEmployeePort = Omit<
   IEditEmployee,
   'biometrics' | 'biometrics' | 'departmentID'
 >;
+type IEditEmployeeFormPort = Omit<IEditEmployee, 'biometrics' | 'biometrics'>;
 
 interface IEditEmployeeBiometryPort {
   employeeId: number;
@@ -114,4 +115,5 @@ export type {
   IDeleteEmployeeBiometryPort,
   IEditEmployeeBiometryPort,
   IEditEmployeeDto,
+  IEditEmployeeFormPort,
 };

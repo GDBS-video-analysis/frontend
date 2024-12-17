@@ -2,16 +2,23 @@ import { useGetDepartmentsUseCase } from '@entities/case/departments/use-case';
 import { ISelectOption } from '@shared/components/common/select/interface';
 import { IDepartmentDto } from '@shared/interfaces/departments';
 import { UseQueryResult } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 type IUseGetDepartmentsPresenterReturn = UseQueryResult<IDepartmentDto> & {
   departmentsSelectOptions: ISelectOption[];
   postsSelectOptions: ISelectOption[];
   handleDepartmentChange(e: React.FormEvent<HTMLSelectElement>): void;
 };
-export const useGetDepartmentsPresenter = (
-  reverseValues = false
-): IUseGetDepartmentsPresenterReturn => {
+
+interface IUseGetDepartmentsPresenterProps {
+  reverseValues?: boolean;
+  departmentValue?: string;
+}
+
+export const useGetDepartmentsPresenter = ({
+  reverseValues = false,
+  departmentValue,
+}: IUseGetDepartmentsPresenterProps): IUseGetDepartmentsPresenterReturn => {
   const [selectedDepartment, setSelectedDepartment] = useState<number>();
 
   const response = useGetDepartmentsUseCase();
@@ -49,6 +56,15 @@ export const useGetDepartmentsPresenter = (
       }));
     return [];
   }, [response, selectedDepartment, reverseValues]);
+
+  useEffect(() => {
+    if (departmentValue)
+      setSelectedDepartment(
+        departmentsSelectOptions.find(
+          (department) => department.value === departmentValue
+        )?.index
+      );
+  }, [departmentsSelectOptions, departmentValue]);
 
   return {
     postsSelectOptions,

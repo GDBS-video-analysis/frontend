@@ -18,7 +18,7 @@ export const NewEmployeeForm = ({ form }: INewEmployeeFormProps) => {
     departmentsSelectOptions,
     postsSelectOptions,
     handleDepartmentChange,
-  } = useGetDepartmentsPresenter();
+  } = useGetDepartmentsPresenter({});
 
   return (
     <div className="w-[616px]">
