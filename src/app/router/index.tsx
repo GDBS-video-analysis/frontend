@@ -2,7 +2,7 @@ import { LazyLoader } from "@shared/components/common/load-component";
 import { ERoutes } from "@shared/enums/routes";
 import { BaseLayout } from "@widgets/layouts/base-layout";
 import { lazy } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const NewEmployeePage = LazyLoader(lazy(() => import("@pages/employee/new")));
 const EventsPage = LazyLoader(lazy(() => import("@pages/events/events-page")));
@@ -27,6 +27,7 @@ const UnregisterPersonPage = LazyLoader(
 );
 const EditEmployeePage = LazyLoader(lazy(() => import("@pages/employee/edit")));
 export const router = createBrowserRouter([
+  { element: <Navigate to={ERoutes.EVENTS} />, path: "/" },
   {
     element: <BaseLayout />,
     children: [
